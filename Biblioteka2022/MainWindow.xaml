@@ -7,6 +7,56 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <TabControl>
+            <TabItem Header="Wyświetl">
+                <Grid Background="#FFE5E5E5">
+                    <Grid Margin="10,10,10,10" Background="#FFFFFF" VerticalAlignment="Top" >
+                        <Grid Margin="10,10,10,60" VerticalAlignment="Top">
+                            <Label FontSize="24" Margin="10,10,10,10" HorizontalAlignment="Left">Wyświetlaj z</Label>
+                            <ComboBox Width="230" Height="30" Margin="160,10,10,10" HorizontalAlignment="Left">
+                                <ComboBoxItem Content="Wypożyczenia" FontSize="18" IsSelected="True"/>
+                                <ComboBoxItem Content="Klienci" FontSize="18"/>
+                                <ComboBoxItem Content="Ksiązki" FontSize="18"/>
+                            </ComboBox>
+                        </Grid>
+                        <Grid Margin="10,60,10,10" VerticalAlignment="Bottom">
+                            <ComboBox Width="100                                  " Height="30" Margin="10,10,10,10" HorizontalAlignment="Left">
+                                <ComboBoxItem Content="Imie" FontSize="18"/>
+                            </ComboBox>
+                            <ComboBox Width="190" Height="30" Margin="115,10,0,10" HorizontalAlignment="Left">
+                                <ComboBoxItem Content="Rozpoczyna się od" FontSize="18" IsSelected="True"/>
+                                <ComboBoxItem Content="Jest równe" FontSize="18" IsSelected="True"/>
+                                <ComboBoxItem Content="Zawiera" FontSize="18"/>
+                            </ComboBox>
+                            <TextBox Width="190" Height="30" Margin="310,10,0,10" HorizontalAlignment="Left"></TextBox>
+                            <Button Width="150" Height="30" HorizontalAlignment="Right" Margin="10,10,10,10" FontSize="18">Szukaj</Button>
+                        </Grid>
+                    </Grid>
+                    <RichTextBox Margin="10,150,10,10" FontSize="18">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text="..."/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Dodaj">
+                <Grid Background="#FFE5E5E5">
+                    <TabControl>
+                        <TabItem Header="Wyporzyczenia">
+                            
+                        </TabItem>
+                        <TabItem Header="Klienci">
+
+                        </TabItem>
+                        <TabItem Header="Ksiązki">
+
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+        </TabControl>
 
     </Grid>
 </Window>
