@@ -13,26 +13,26 @@
                     <Grid Margin="10,10,10,10" Background="#FFFFFF" VerticalAlignment="Top" >
                         <Grid Margin="10,10,10,60" VerticalAlignment="Top">
                             <Label FontSize="24" Margin="10,10,10,10" HorizontalAlignment="Left">Wyświetlaj z</Label>
-                            <ComboBox Width="230" Height="30" Margin="160,10,10,10" HorizontalAlignment="Left">
+                            <ComboBox x:Name="input_wyswietl_tabela" Width="230" Height="30" Margin="160,10,10,10" HorizontalAlignment="Left">
                                 <ComboBoxItem Content="Wypożyczenia" FontSize="18" IsSelected="True"/>
                                 <ComboBoxItem Content="Klienci" FontSize="18"/>
                                 <ComboBoxItem Content="Ksiązki" FontSize="18"/>
                             </ComboBox>
                         </Grid>
                         <Grid Margin="10,60,10,10" VerticalAlignment="Bottom">
-                            <ComboBox Width="100" Height="30" Margin="10,10,10,10" HorizontalAlignment="Left">
+                            <ComboBox x:Name="input_wyswietl_pole" Width="100" Height="30" Margin="10,10,10,10" HorizontalAlignment="Left">
                                 <ComboBoxItem Content="Imie" FontSize="18"/>
                             </ComboBox>
-                            <ComboBox Width="190" Height="30" Margin="115,10,0,10" HorizontalAlignment="Left">
+                            <ComboBox x:Name="input_wyswietl_sposob" Width="190" Height="30" Margin="115,10,0,10" HorizontalAlignment="Left">
                                 <ComboBoxItem Content="Rozpoczyna się od" FontSize="18" IsSelected="True"/>
                                 <ComboBoxItem Content="Jest równe" FontSize="18" IsSelected="True"/>
                                 <ComboBoxItem Content="Zawiera" FontSize="18"/>
                             </ComboBox>
-                            <TextBox Width="190" Height="30" Margin="310,10,0,10" HorizontalAlignment="Left"></TextBox>
+                            <TextBox x:Name="input_wyswietl_filtr" Width="190" Height="30" Margin="310,10,0,10" HorizontalAlignment="Left"></TextBox>
                             <Button Width="150" Height="30" HorizontalAlignment="Right" Margin="10,10,10,10" FontSize="18">Szukaj</Button>
                         </Grid>
                     </Grid>
-                    <RichTextBox Margin="10,150,10,10" FontSize="18">
+                    <RichTextBox x:Name="textbox_wyswietl" Margin="10,150,10,10" FontSize="18">
                         <FlowDocument>
                             <Paragraph>
                                 <Run Text="..."/>
@@ -46,36 +46,36 @@
                     <TabControl>
                         <TabItem Header="Wyporzyczenia">
                             <Grid Background="#FFE5E5E5">
-                                <ComboBox Width="300" Height="30" Margin="10,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <ComboBox x:Name="input_wyporzyczenia_klient" Width="300" Height="30" Margin="10,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top">
 
                                 </ComboBox>
-                                <ComboBox Width="300" Height="30" Margin="10,50,10,10" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <ComboBox x:Name="input_wyporzyczenia_ksiazka" Width="300" Height="30" Margin="10,50,10,10" HorizontalAlignment="Left" VerticalAlignment="Top">
 
                                 </ComboBox>
                                 <Label FontSize="18" Margin="10,90,10,10" HorizontalAlignment="Left" VerticalAlignment="Top">Data wyporzyczenia</Label>
-                                <DatePicker Width="250" Height="30" Margin="200,90,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                <DatePicker x:Name="input_wyporzyczenia_datawyporzyczenia" Width="250" Height="30" Margin="200,90,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                                 <Label FontSize="18" Margin="10,140,10,10" HorizontalAlignment="Left" VerticalAlignment="Top">Data zwrotu</Label>
-                                <DatePicker Width="250" Height="30" Margin="200,140,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                <DatePicker x:Name="input_wyporzyczenia_datazwrot" Width="250" Height="30" Margin="200,140,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-                                <Button Width="250" Height="30" Margin="10,200,10,10" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14">Dodaj</Button>
+                                <Button x:Name="button_wyporzyczenia_dodaj" Width="250" Height="30" Margin="10,200,10,10" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14">Dodaj</Button>
                             </Grid>
                            
                         </TabItem>
                         <TabItem Header="Klienci">
                             <Grid Background="#FFE5E5E5">
                                 <Label FontSize="18" Margin="10,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top">Imie</Label>
-                                <TextBox Width="250" Height="30" Margin="200,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                <TextBox x:Name="input_klient_imie" Width="250" Height="30" Margin="200,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                                 
                                 <Label FontSize="18" Margin="10,50,10,10" HorizontalAlignment="Left" VerticalAlignment="Top">Nazwisko</Label>
-                                <TextBox Width="250" Height="30" Margin="200,50,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                <TextBox x:Name="input_klient_nazwisko" Width="250" Height="30" Margin="200,50,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                                 
                                 <Label FontSize="18" Margin="10,90,10,10" HorizontalAlignment="Left" VerticalAlignment="Top">Pesel</Label>
-                                <TextBox Width="250" Height="30" Margin="200,90,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                <TextBox x:Name="input_klient_pesel" Width="250" Height="30" Margin="200,90,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                                 
                                 <Label FontSize="18" Margin="10,130,10,10" HorizontalAlignment="Left" VerticalAlignment="Top">Telefon</Label>
-                                <TextBox Width="250" Height="30" Margin="200,130,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                <TextBox x:Name="input_klient_telefon" Width="250" Height="30" Margin="200,130,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-                                <Button Width="250" Height="30" Margin="10,200,10,10" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14">Dodaj</Button>
+                                <Button x:Name="button_klient_dodaj" Width="250" Height="30" Margin="10,200,10,10" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14">Dodaj</Button>
                             </Grid>
                             
                         </TabItem>
@@ -83,18 +83,18 @@
 
                             <Grid Background="#FFE5E5E5">
                                 <Label FontSize="18" Margin="10,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top">Tytuł</Label>
-                                <TextBox Width="250" Height="30" Margin="200,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                <TextBox x:Name="input_ksiazki_tytul" Width="250" Height="30" Margin="200,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
                                 <Label FontSize="18" Margin="10,50,10,10" HorizontalAlignment="Left" VerticalAlignment="Top">Autor</Label>
-                                <TextBox Width="250" Height="30" Margin="200,50,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                <TextBox x:Name="input_ksiazki_autor" Width="250" Height="30" Margin="200,50,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
                                 <Label FontSize="18" Margin="10,90,10,10" HorizontalAlignment="Left" VerticalAlignment="Top">Opis</Label>
-                                <TextBox Width="450" Height="30" Margin="200,90,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                <TextBox x:Name="input_ksiazki_opis" Width="450" Height="30" Margin="200,90,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
                                 <Label FontSize="18" Margin="10,130,10,10" HorizontalAlignment="Left" VerticalAlignment="Top">Rok Wydania</Label>
-                                <TextBox Width="80" Height="30" Margin="200,130,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                <TextBox x:Name="input_ksiazki_wydanie" Width="80" Height="30" Margin="200,130,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-                                <Button Width="250" Height="30" Margin="10,200,10,10" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14">Dodaj</Button>
+                                <Button x:Name="button_ksiazki_dodaj" Width="250" Height="30" Margin="10,200,10,10" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14">Dodaj</Button>
                             </Grid>
                             
                         </TabItem>
