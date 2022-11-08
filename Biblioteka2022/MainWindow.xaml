@@ -62,10 +62,41 @@
                            
                         </TabItem>
                         <TabItem Header="Klienci">
+                            <Grid Background="#FFE5E5E5">
+                                <Label FontSize="18" Margin="10,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top">Imie</Label>
+                                <TextBox Width="250" Height="30" Margin="200,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                
+                                <Label FontSize="18" Margin="10,50,10,10" HorizontalAlignment="Left" VerticalAlignment="Top">Nazwisko</Label>
+                                <TextBox Width="250" Height="30" Margin="200,50,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                
+                                <Label FontSize="18" Margin="10,90,10,10" HorizontalAlignment="Left" VerticalAlignment="Top">Pesel</Label>
+                                <TextBox Width="250" Height="30" Margin="200,90,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                
+                                <Label FontSize="18" Margin="10,130,10,10" HorizontalAlignment="Left" VerticalAlignment="Top">Telefon</Label>
+                                <TextBox Width="250" Height="30" Margin="200,130,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
+                                <Button Width="250" Height="30" Margin="10,200,10,10" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14">Dodaj</Button>
+                            </Grid>
+                            
                         </TabItem>
                         <TabItem Header="Ksiązki">
 
+                            <Grid Background="#FFE5E5E5">
+                                <Label FontSize="18" Margin="10,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top">Tytuł</Label>
+                                <TextBox Width="250" Height="30" Margin="200,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+                                <Label FontSize="18" Margin="10,50,10,10" HorizontalAlignment="Left" VerticalAlignment="Top">Autor</Label>
+                                <TextBox Width="250" Height="30" Margin="200,50,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+                                <Label FontSize="18" Margin="10,90,10,10" HorizontalAlignment="Left" VerticalAlignment="Top">Opis</Label>
+                                <TextBox Width="450" Height="30" Margin="200,90,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+                                <Label FontSize="18" Margin="10,130,10,10" HorizontalAlignment="Left" VerticalAlignment="Top">Rok Wydania</Label>
+                                <TextBox Width="80" Height="30" Margin="200,130,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+                                <Button Width="250" Height="30" Margin="10,200,10,10" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14">Dodaj</Button>
+                            </Grid>
+                            
                         </TabItem>
                     </TabControl>
                 </Grid>
