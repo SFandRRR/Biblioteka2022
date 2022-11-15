@@ -13,9 +13,44 @@ namespace Biblioteka2022
         public MainWindow()
         {
             InitializeComponent();
-         
-            }
+        }
 
+        //string SQLServer = "server=s217-pc12\\SQLEXPRESS2019;database=Sekretariat;Integrated Security=True";
+
+        //SqlConnection.
+        //SqlConnection sql = new SqlConnection(SQLServer);
+        //sql.Open();
+        //string Q1 = "INSERT INTO Uczniowie (Imie, Nazwisko, Klasa) VALUES('" + imie + "', '" + nazw + "', '" + klas + "');";
+        //SqlCommand command = new SqlCommand(Q1, sql);
+        //command.ExecuteReader();
+        //sql.Close();
+ 
+        private void input_wyswietl_tabela_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxItem typeItem = (ComboBoxItem)input_wyswietl_tabela.SelectedItem;
+            string tabela = typeItem.Content.ToString();
+
+            pola_tabeli(tabela); 
+
+            string z = wyswietl_rekordy(tabela, "", "", 0);
+            Trace.WriteLine(z + "bbbbb");
+        }
+
+        private void button_wyswietl_szukaj_Click(object sender, RoutedEventArgs e)
+        {
+            string tabela = "";
+            string pole = "";
+            string filtr = "";
+            int sposob = 0;
+
+            ComboBoxItem typeItem = (ComboBoxItem)input_wyswietl_tabela.SelectedItem;
+            string value = typeItem.Content.ToString();
+
+            //tabela = input_wyswietl_tabela.Tag.ToString();
+            textbox_wyswietl.Document.Blocks.Add(new Paragraph(new Run(typeItem.Content.ToString())));
+
+
+        }
 
         string wyswietl_rekordy(
            string tabela = "",
@@ -67,39 +102,9 @@ namespace Biblioteka2022
             return "";
         }
 
-        //string SQLServer = "server=s217-pc12\\SQLEXPRESS2019;database=Sekretariat;Integrated Security=True";
-
-        //SqlConnection.
-        //SqlConnection sql = new SqlConnection(SQLServer);
-        //sql.Open();
-        //string Q1 = "INSERT INTO Uczniowie (Imie, Nazwisko, Klasa) VALUES('" + imie + "', '" + nazw + "', '" + klas + "');";
-        //SqlCommand command = new SqlCommand(Q1, sql);
-        //command.ExecuteReader();
-        //sql.Close();
-
-
-
-        private void button_wyswietl_szukaj_Click(object sender, RoutedEventArgs e)
+        void pola_tabeli(string tabela)
         {
-            string tabela = "";
-            string pole = "";
-            string filtr = "";
-            int sposob = 0;
-
-            ComboBoxItem typeItem = (ComboBoxItem)input_wyswietl_tabela.SelectedItem;
-            string value = typeItem.Content.ToString();
-
-            //tabela = input_wyswietl_tabela.Tag.ToString();
-            textbox_wyswietl.Document.Blocks.Add(new Paragraph(new Run(typeItem.Content.ToString())));
-
-
-        }
-
-        private void input_wyswietl_tabela_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBoxItem typeItem = (ComboBoxItem)input_wyswietl_tabela.SelectedItem;
-            string tabela = typeItem.Content.ToString();
-
+            try { 
             switch (tabela)
             {
                 case "Wypożyczenia":
@@ -131,11 +136,16 @@ namespace Biblioteka2022
 
                     break;
                 default:
+                    Trace.WriteLine("RIP");
                     break;
             }
+            }
+            catch
+            {
 
-            string z = wyswietl_rekordy(tabela, "", "", 0);
-            Trace.WriteLine(z);
+            }
         }
+
+
     }
 }
