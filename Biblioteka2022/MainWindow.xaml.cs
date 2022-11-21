@@ -1,3 +1,5 @@
+using System;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,16 +17,6 @@ namespace Biblioteka2022
             InitializeComponent();
         }
 
-        //string SQLServer = "server=s217-pc12\\SQLEXPRESS2019;database=Sekretariat;Integrated Security=True";
-
-        //SqlConnection.
-        //SqlConnection sql = new SqlConnection(SQLServer);
-        //sql.Open();
-        //string Q1 = "INSERT INTO Uczniowie (Imie, Nazwisko, Klasa) VALUES('" + imie + "', '" + nazw + "', '" + klas + "');";
-        //SqlCommand command = new SqlCommand(Q1, sql);
-        //command.ExecuteReader();
-        //sql.Close();
- 
         private void input_wyswietl_tabela_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBoxItem typeItem = (ComboBoxItem)input_wyswietl_tabela.SelectedItem;
@@ -34,6 +26,7 @@ namespace Biblioteka2022
 
             string z = wyswietl_rekordy(tabela, "", "", 0);
             Trace.WriteLine(z + "bbbbb");
+
         }
 
         private void button_wyswietl_szukaj_Click(object sender, RoutedEventArgs e)
@@ -46,8 +39,11 @@ namespace Biblioteka2022
             ComboBoxItem typeItem = (ComboBoxItem)input_wyswietl_tabela.SelectedItem;
             string value = typeItem.Content.ToString();
 
+            tabela = typeItem.Content.ToString();
+            value = wyswietl_rekordy(tabela, "", "", 0);
+
             //tabela = input_wyswietl_tabela.Tag.ToString();
-            textbox_wyswietl.Document.Blocks.Add(new Paragraph(new Run(typeItem.Content.ToString())));
+            textbox_wyswietl.Document.Blocks.Add(new Paragraph(new Run(value.ToString())));
 
 
         }
@@ -97,53 +93,81 @@ namespace Biblioteka2022
 
                 }
                 Query += ";";
-                return Query;
+                try
+                {
+                    string SQLServer = "server=DESKTOP-8JDEIA5;database=Biblioteka2022;Integrated Security=True";
+                    SqlConnection sql = new SqlConnection(SQLServer);
+                   sql.Open();
+                    SqlCommand command = new SqlCommand(Query, sql);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            Trace.WriteLine(String.Format("{0}", reader["id"]));
+                        }
+                    }
+
+                    sql.Close();
+
+                    return Query;
+                }
+                catch
+                {
+                    Trace.WriteLine("> Error with fetching SQL Query");
+                }
+
             }
             return "";
         }
 
         void pola_tabeli(string tabela)
         {
-            try { 
+            
             switch (tabela)
             {
                 case "Wypożyczenia":
-                    input_wyswietl_pole.Items.Clear();
-                    input_wyswietl_pole.Items.Add("Id");
-                    input_wyswietl_pole.Items.Add("Id Klienta");
-                    input_wyswietl_pole.Items.Add("Id Książki");
-                    input_wyswietl_pole.Items.Add("Data Wyporzyczenia");
-                    input_wyswietl_pole.Items.Add("Data Zwrotu");
+                    if(input_wyswietl_pole != null) { 
+                        input_wyswietl_pole.Items.Clear();
+                        input_wyswietl_pole.Items.Add("Id");
+                        input_wyswietl_pole.Items.Add("Id Klienta");
+                        input_wyswietl_pole.Items.Add("Id Książki");
+                        input_wyswietl_pole.Items.Add("Data Wyporzyczenia");
+                        input_wyswietl_pole.Items.Add("Data Zwrotu");
+                    }
 
                     break;
                 case "Klienci":
 
-                    input_wyswietl_pole.Items.Clear();
-                    input_wyswietl_pole.Items.Add("Id Książki");
-                    input_wyswietl_pole.Items.Add("Tytuł");
-                    input_wyswietl_pole.Items.Add("Autor");
-                    input_wyswietl_pole.Items.Add("Opis");
-                    input_wyswietl_pole.Items.Add("Rok Wydania");
+                    if (input_wyswietl_pole != null)
+                    {
+                        input_wyswietl_pole.Items.Clear();
+                        input_wyswietl_pole.Items.Add("Id Książki");
+                        input_wyswietl_pole.Items.Add("Tytuł");
+                        input_wyswietl_pole.Items.Add("Autor");
+                        input_wyswietl_pole.Items.Add("Opis");
+                        input_wyswietl_pole.Items.Add("Rok Wydania");
+                    }
 
                     break;
                 case "Ksiązki":
-                    input_wyswietl_pole.Items.Clear();
-                    input_wyswietl_pole.Items.Add("Id Klienta");
-                    input_wyswietl_pole.Items.Add("Imie");
-                    input_wyswietl_pole.Items.Add("Nazwisko");
-                    input_wyswietl_pole.Items.Add("Pesel");
-                    input_wyswietl_pole.Items.Add("Telefon");
+
+                    if (input_wyswietl_pole != null)
+                    {
+                        input_wyswietl_pole.Items.Clear();
+                        input_wyswietl_pole.Items.Add("Id Klienta");
+                        input_wyswietl_pole.Items.Add("Imie");
+                        input_wyswietl_pole.Items.Add("Nazwisko");
+                        input_wyswietl_pole.Items.Add("Pesel");
+                        input_wyswietl_pole.Items.Add("Telefon");
+                    }
 
                     break;
                 default:
-                    Trace.WriteLine("RIP");
+                    Trace.WriteLine("> RIP pola_tabeli()");
                     break;
             }
-            }
-            catch
-            {
-
-            }
+            
         }
 
 
