@@ -151,7 +151,11 @@ namespace Biblioteka2022
                 switch (sposob)
                     {
                         case "Rozpoczyna się od":
-                            Query += "Like '%" + filtr.ToString()+ "'";
+                            if (pole == "Data Wyporzyczenia" || pole == "Data Zwrotu") {
+                                Query += "Like '%" + filtr.ToString() + "'";
+                            } else {
+                                Query += "Like '" + filtr.ToString() + "%'";
+                            }                        
                             break;
                         case "Jest równe":
                             Query += "= "+filtr.ToString();
@@ -167,7 +171,7 @@ namespace Biblioteka2022
                     }
                 }
                 Query += ";";
-                return Query;
+                //return Query;
                 try
                 {
                     string SQLServer = "server=s217-pc12\\SQLEXPRESS2019;database=Biblioteka2022;Integrated Security=True";
