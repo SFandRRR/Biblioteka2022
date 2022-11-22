@@ -151,13 +151,13 @@ namespace Biblioteka2022
                 switch (sposob)
                     {
                         case "Rozpoczyna się od":
-                        
+                            Query += "Like '%" + filtr.ToString()+ "'";
                             break;
                         case "Jest równe":
                             Query += "= "+filtr.ToString();
                             break;
                         case "Zawiera":
-
+                            Query += "Like '%" + filtr.ToString()+ "%'";
                             break;
 
                         default:
@@ -167,7 +167,7 @@ namespace Biblioteka2022
                     }
                 }
                 Query += ";";
-
+                return Query;
                 try
                 {
                     string SQLServer = "server=s217-pc12\\SQLEXPRESS2019;database=Biblioteka2022;Integrated Security=True";
@@ -179,7 +179,7 @@ namespace Biblioteka2022
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        if (reader.Read())
+                        while(reader.Read())
                         {
                             TheInformation += reader[0] + " | " + reader[1] + " | " + reader[2] + " | " + reader[3] + " | " + reader[4] + "\n";
                         }
