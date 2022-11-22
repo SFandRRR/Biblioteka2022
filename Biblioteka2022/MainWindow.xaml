@@ -14,14 +14,13 @@
                         <Grid Margin="10,10,10,60" VerticalAlignment="Top">
                             <Label FontSize="24" Margin="10,10,10,10" HorizontalAlignment="Left">Wyświetlaj z</Label>
                             <ComboBox x:Name="input_wyswietl_tabela" Width="230" Height="30" Margin="160,10,10,10" HorizontalAlignment="Left" SelectionChanged="input_wyswietl_tabela_SelectionChanged">
-                                <ComboBoxItem Content="Wypożyczenia" FontSize="18" IsSelected="True"/>
+                                <ComboBoxItem Content="Wypożyczenia" FontSize="18"/>
                                 <ComboBoxItem Content="Klienci" FontSize="18"/>
                                 <ComboBoxItem Content="Ksiązki" FontSize="18"/>
                             </ComboBox>
                         </Grid>
                         <Grid Margin="10,60,10,10" VerticalAlignment="Bottom">
                             <ComboBox x:Name="input_wyswietl_pole" Width="100" Height="30" Margin="10,10,10,10" HorizontalAlignment="Left">
-                                <ComboBoxItem Content="Imie" FontSize="18"/>
                             </ComboBox>
                             <ComboBox x:Name="input_wyswietl_sposob" Width="190" Height="30" Margin="115,10,0,10" HorizontalAlignment="Left">
                                 <ComboBoxItem Content="Rozpoczyna się od" FontSize="18" IsSelected="True"/>

@@ -33,16 +33,25 @@ namespace Biblioteka2022
         {
             string tabela = "";
             string pole = "";
-            string filtr = "";
+            string filtr = "";           
             int sposob = 0;
 
-            ComboBoxItem typeItem = (ComboBoxItem)input_wyswietl_tabela.SelectedItem;
-            string value = typeItem.Content.ToString();
+            string value = "";
 
-            tabela = typeItem.Content.ToString();
-            value = wyswietl_rekordy(tabela, "", "", 0);
+            ComboBoxItem ItemTabela = (ComboBoxItem)input_wyswietl_tabela.SelectedItem;
+            if (ItemTabela != null) {
+                tabela = ItemTabela.Content.ToString();
+            }
 
-            //tabela = input_wyswietl_tabela.Tag.ToString();
+            ComboBoxItem ItemPole = (ComboBoxItem)input_wyswietl_pole.SelectedItem;
+            if (ItemPole != null)
+            {
+                pole = ItemPole.Content.ToString();
+            }
+
+            value = wyswietl_rekordy(tabela, pole, "", 0);
+
+            textbox_wyswietl.Document.Blocks.Clear();
             textbox_wyswietl.Document.Blocks.Add(new Paragraph(new Run(value.ToString())));
 
 
@@ -55,6 +64,7 @@ namespace Biblioteka2022
            int sposob = 0)
         {
             string Query = "SELECT ";
+            string TheInformation = "";
             if (tabela != "")
             {
 
@@ -78,14 +88,18 @@ namespace Biblioteka2022
                 {
                     case "Wypożyczenia":
                         Query += "FROM Wyporzyczenia";
+                        TheInformation = "[Id] | [Id_Klient] | [Id_Ksiazka] | [DataWyporzyczenia] | [DataZwrotu] \n";
                         break;
                     case "Klienci":
                         Query += "FROM Klienci";
+                        TheInformation = "[Id_Klient] | [Imie] | [Nazwisko] | [Pesel] | [Telefon] \n";
                         break;
                     case "Ksiązki":
                         Query += "FROM Ksiazki";
+                        TheInformation = "[Id_Ksiazka] | [Tytul] | [Autor] | [Opis] | [RokWydania] \n";
                         break;
                     default:
+                        return "Nie wybrano tabeli";
                         break;
                 }
                 if (sposob != 0)
@@ -93,9 +107,14 @@ namespace Biblioteka2022
 
                 }
                 Query += ";";
+
+                
+
                 try
                 {
-                    string SQLServer = "server=DESKTOP-8JDEIA5;database=Biblioteka2022;Integrated Security=True";
+                    string SQLServer = "server=s217-pc12\\SQLEXPRESS2019;database=Biblioteka2022;Integrated Security=True";
+                    //s217-pc12\SQLEXPRESS2019
+                    //DESKTOP-8JDEIA5
                     SqlConnection sql = new SqlConnection(SQLServer);
                    sql.Open();
                     SqlCommand command = new SqlCommand(Query, sql);
@@ -104,13 +123,14 @@ namespace Biblioteka2022
                     {
                         if (reader.Read())
                         {
-                            Trace.WriteLine(String.Format("{0}", reader["id"]));
+                            TheInformation += reader[0] + " | " + reader[1] + " | " + reader[2] + " | " + reader[3] + " | " + reader[4] + "\n";
                         }
                     }
 
                     sql.Close();
 
                     return Query;
+                    //return TheInformation;
                 }
                 catch
                 {
