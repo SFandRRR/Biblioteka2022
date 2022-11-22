@@ -43,10 +43,15 @@ namespace Biblioteka2022
                 tabela = ItemTabela.Content.ToString();
             }
 
-            ComboBoxItem ItemPole = (ComboBoxItem)input_wyswietl_pole.SelectedItem;
+            /*ComboBoxItem ItemPole = (ComboBoxItem)input_wyswietl_pole.SelectedItem;
             if (ItemPole != null)
             {
                 pole = ItemPole.Content.ToString();
+            }*/
+
+            if (input_wyswietl_pole.SelectedItem != null)
+            {
+                pole = input_wyswietl_pole.SelectedItem.ToString();
             }
 
             value = wyswietl_rekordy(tabela, pole, "", 0);
@@ -70,15 +75,46 @@ namespace Biblioteka2022
 
                 switch (pole)
                 {
-                    case "Wypożyczenia":
-                        Query += " ";
+                    case "Id":
+                        Query += "Id ";
                         break;
-                    case "Klienci":
-                        Query += " ";
+                    case "Id Klienta":
+                        Query += "Id_Klient ";
                         break;
-                    case "Ksiązki":
-                        Query += " ";
+                    case "Id Ksiązki":
+                        Query += "Id_Ksiazka ";
                         break;
+                    case "Data Wyporzyczenia":
+                        Query += "DataWyporzyczenia ";
+                        break;
+                    case "Data Zwrotu":
+                        Query += "DataZwrotu ";
+                        break;
+                    case "Tytuł":
+                        Query += "Tytul ";
+                        break;
+                    case "Autor":
+                        Query += "Autor ";
+                        break;
+                    case "Opis":
+                        Query += "Opis ";
+                        break;
+                    case "Rok Wydania":
+                        Query += "RokWydania ";
+                        break;
+                    case "Imie":
+                        Query += "Imie ";
+                        break;
+                    case "Nazwisko":
+                        Query += "Nazwisko ";
+                        break;
+                    case "Pesel":
+                        Query += "Pesel ";
+                        break;
+                    case "Telefon":
+                        Query += "Telefon ";
+                        break;
+
                     default:
                         Query += "* ";
                         break;
@@ -108,8 +144,6 @@ namespace Biblioteka2022
                 }
                 Query += ";";
 
-                
-
                 try
                 {
                     string SQLServer = "server=s217-pc12\\SQLEXPRESS2019;database=Biblioteka2022;Integrated Security=True";
@@ -123,14 +157,14 @@ namespace Biblioteka2022
                     {
                         if (reader.Read())
                         {
-                            TheInformation += reader[0] + " | " + reader[1] + " | " + reader[2] + " | " + reader[3] + " | " + reader[4] + "\n";
+                            TheInformation += reader[0] + " | " + reader[1] + " | " + reader[2] + " | " + reader[3].ToString().Substring(0, 10) + " | " + reader[4].ToString().Substring(0,10) + "\n";
                         }
                     }
 
                     sql.Close();
 
-                    return Query;
-                    //return TheInformation;
+                    //return Query;
+                    return TheInformation;
                 }
                 catch
                 {
@@ -157,7 +191,7 @@ namespace Biblioteka2022
                     }
 
                     break;
-                case "Klienci":
+                case "Ksiązki":
 
                     if (input_wyswietl_pole != null)
                     {
@@ -170,7 +204,7 @@ namespace Biblioteka2022
                     }
 
                     break;
-                case "Ksiązki":
+                case "Klienci":
 
                     if (input_wyswietl_pole != null)
                     {
