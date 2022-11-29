@@ -437,6 +437,7 @@ namespace Biblioteka2022
         {
             label_wyporzyczenia.Content = "";
 
+            bool Check = true;
             int klient = -1;
             int ksiazka = -1;
 
@@ -452,6 +453,7 @@ namespace Biblioteka2022
                 else
                 {
                     label_wyporzyczenia.Content = "Należy wybrać klienta!";
+                    Check = false;
                 }
 
                 if (input_wyporzyczenia_ksiazka.SelectedItem != null)
@@ -461,34 +463,66 @@ namespace Biblioteka2022
                 else
                 {
                     label_wyporzyczenia.Content = "Należy wybrać książke!";
+                    Check = false;
                 }
             } catch { Trace.WriteLine("ComboBoxItem Null"); }
 
             if (input_wyporzyczenia_datawyporzyczenia.ToString() != "")
             {
-                DataWyporzyczenia = input_wyporzyczenia_datawyporzyczenia.ToString();
+                DataWyporzyczenia = input_wyporzyczenia_datawyporzyczenia.DisplayDate.ToString("yyyy-MM-dd");
             }
             else
             {
                 label_wyporzyczenia.Content = "Należy wybrać datę wyporzyczenia!";
+                Check = false;
             }
 
             if (input_wyporzyczenia_datazwrot.ToString() != "")
             {
-                DataZwrotu = input_wyporzyczenia_datazwrot.ToString();
+                DataZwrotu = input_wyporzyczenia_datazwrot.DisplayDate.ToString("yyyy-MM-dd");
             }
             else
             {
                 label_wyporzyczenia.Content = "Należy wybrać datę zwrotu!";
+                Check = false;
             }
 
-            TimeSpan? DataDiffrence = (input_wyporzyczenia_datazwrot.SelectedDate - input_wyporzyczenia_datawyporzyczenia.SelectedDate);
-            if (DataDiffrence.ToString()[0] == '-')
+            if (Check) {
+                TimeSpan? DataDiffrence = (input_wyporzyczenia_datazwrot.SelectedDate - input_wyporzyczenia_datawyporzyczenia.SelectedDate);
+                if (DataDiffrence.ToString()[0] == '-')
+                {
+                    label_wyporzyczenia.Content = "Data zwrotu nie może być przed datą wyporzyczenia!";
+                    Check = false;
+                }
+            }
+            
+
+            if (Check)
             {
-                label_wyporzyczenia.Content = "Data zwrotu nie może być przed datą wyporzyczenia!";
+                label_wyporzyczenia.Content = DataWyporzyczenia + DataZwrotu;
+                try
+                {
+                    string Query = "INSERT INTO Wyporzyczenia(Id_Klient, Id_Ksiazka, DataWyporzyczenia, DataZwrotu) VALUES(" + klient + ", " + ksiazka+ ", '" +DataWyporzyczenia+ "', '" + DataZwrotu + "');";
+
+                    string SQLServer = "server=s217-pc12\\SQLEXPRESS2019;database=Biblioteka2022;Integrated Security=True";
+                    //s217-pc12\SQLEXPRESS2019
+                    //DESKTOP-8JDEIA5
+                    SqlConnection sql = new SqlConnection(SQLServer);
+                    sql.Open();
+                    SqlCommand command = new SqlCommand(Query, sql);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                    }
+
+                    sql.Close();
+
+                }
+                catch
+                {
+                    Trace.WriteLine("> Error with fetching SQL Query");
+                }
             }
-
-
 
 
             //label_wyporzyczenia.Content = DataDiffrence.ToString();
