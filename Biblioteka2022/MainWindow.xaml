@@ -76,7 +76,7 @@
                                 <TextBox x:Name="input_klient_telefon" Width="250" Height="30" Margin="200,130,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
                                 <Label x:Name="label_klient" Content="." VerticalAlignment="Top" Height="30" Margin="0,240,0,0" Width="500" HorizontalAlignment="Left" />
-                                <Button x:Name="button_klient_dodaj" Width="250" Height="30" Margin="10,200,10,10" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14">Dodaj</Button>
+                                <Button x:Name="button_klient_dodaj" Width="250" Height="30" Margin="10,200,10,10" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Click="button_klient_dodaj_Click">Dodaj</Button>
                             </Grid>
                             
                         </TabItem>

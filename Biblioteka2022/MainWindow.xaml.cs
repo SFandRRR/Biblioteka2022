@@ -281,5 +281,40 @@ namespace Biblioteka2022
             }
             
         }
+
+        private void button_klient_dodaj_Click(object sender, RoutedEventArgs e)
+        {
+            label_klient.Content = "";
+
+            string imie = input_klient_imie.Text;
+            string nazwisko = input_klient_nazwisko.Text;
+            string pesel = input_klient_pesel.Text;
+            string telefon = input_klient_telefon.Text;
+
+            if (!Regex.IsMatch(pesel, @"^[0-9]+$"))
+            {
+                label_klient.Content = "Pesel musi zawierać jedynie liczby!";
+            }
+
+            if (pesel.Length != 11)
+            {
+                label_klient.Content = "Nie odpowiednia długość peselu!";
+            }
+
+            if (!Regex.IsMatch(telefon, @"^[0-9]+$"))
+            {
+                label_klient.Content = "Telefon musi zawierać jedynie liczby!";
+            }
+
+            if (telefon.Length != 9)
+            {
+                label_klient.Content = "Nie odpowiednia długość numeru telefonu!";
+            }
+
+            if (pesel.Equals(" ") || pesel.Equals("") || telefon.Equals(" ") || telefon.Equals("") || imie.Equals(" ") || imie.Equals("") || nazwisko.Equals(" ") || nazwisko.Equals(""))
+            {
+                label_klient.Content = "Należy Wypełnić wszystkie pola!";
+            }
+        }
     }
 }
