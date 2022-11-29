@@ -1,10 +1,12 @@
 using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Media.Animation;
 
 namespace Biblioteka2022
 {
@@ -261,6 +263,8 @@ namespace Biblioteka2022
         {
             label_ksiazki.Content = "";
 
+            bool Check = true;
+
             string autor = input_ksiazki_autor.Text;
             string tytul = input_ksiazki_tytul.Text;
             string opis = input_ksiazki_opis.Text;
@@ -269,17 +273,46 @@ namespace Biblioteka2022
             if(!Regex.IsMatch(wydanie, @"^[0-9]+$"))
             {
                 label_ksiazki.Content = "Rok wydania może zawierać jedynie liczby!";
+                Check = false;
             }
 
             if ((wydanie.Length>4) == true)
             {
                 label_ksiazki.Content = "Zadługi rok wydania!";
+                Check = false;
             }
 
             if ( autor.Equals(" ")|| autor.Equals("")|| tytul.Equals(" ") || tytul.Equals("") || opis.Equals(" ") || opis.Equals("") || wydanie.Equals(" ") || wydanie.Equals(""))
             {
                 label_ksiazki.Content = "Należy Wypełnić wszystkie pola!";
+                Check = false;
             }
+
+            if (Check)
+            {
+                try
+                {
+                    string Query = "INSERT INTO Ksiazki(Tytul, Autor, Opis, RokWydania) VALUES('"+tytul+"', '"+autor+"', '"+opis+"', '"+wydanie+"');";
+
+                    string SQLServer = "server=s217-pc12\\SQLEXPRESS2019;database=Biblioteka2022;Integrated Security=True";
+                    //s217-pc12\SQLEXPRESS2019
+                    //DESKTOP-8JDEIA5
+                    SqlConnection sql = new SqlConnection(SQLServer);
+                    sql.Open();
+                    SqlCommand command = new SqlCommand(Query, sql);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                    }
+
+                    sql.Close();
+
+                }
+                catch
+                {
+                    Trace.WriteLine("> Error with fetching SQL Query");
+                }
+            }         
 
             UpdateComboBoxWyporzyczenia();
 
@@ -289,6 +322,8 @@ namespace Biblioteka2022
         {
             label_klient.Content = "";
 
+            bool Check = true;
+
             string imie = input_klient_imie.Text;
             string nazwisko = input_klient_nazwisko.Text;
             string pesel = input_klient_pesel.Text;
@@ -297,26 +332,57 @@ namespace Biblioteka2022
             if (!Regex.IsMatch(pesel, @"^[0-9]+$"))
             {
                 label_klient.Content = "Pesel musi zawierać jedynie liczby!";
+                Check = false;
             }
 
             if (pesel.Length != 11)
             {
                 label_klient.Content = "Nie odpowiednia długość peselu!";
+                Check = false;
             }
 
             if (!Regex.IsMatch(telefon, @"^[0-9]+$"))
             {
                 label_klient.Content = "Telefon musi zawierać jedynie liczby!";
+                Check = false;
             }
 
             if (telefon.Length != 9)
             {
                 label_klient.Content = "Nie odpowiednia długość numeru telefonu!";
+                Check = false;
             }
 
             if (pesel.Equals(" ") || pesel.Equals("") || telefon.Equals(" ") || telefon.Equals("") || imie.Equals(" ") || imie.Equals("") || nazwisko.Equals(" ") || nazwisko.Equals(""))
             {
                 label_klient.Content = "Należy Wypełnić wszystkie pola!";
+                Check = false;
+            }
+
+            if (Check)
+            {
+                try
+                {
+                    string Query = "INSERT INTO Klienci(Imie, Nazwisko, Pesel, Telefon) VALUES('" + imie + "', '" + nazwisko + "', '" + pesel + "', '" + telefon + "');";
+
+                    string SQLServer = "server=s217-pc12\\SQLEXPRESS2019;database=Biblioteka2022;Integrated Security=True";
+                    //s217-pc12\SQLEXPRESS2019
+                    //DESKTOP-8JDEIA5
+                    SqlConnection sql = new SqlConnection(SQLServer);
+                    sql.Open();
+                    SqlCommand command = new SqlCommand(Query, sql);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                    }
+
+                    sql.Close();
+
+                }
+                catch
+                {
+                    Trace.WriteLine("> Error with fetching SQL Query");
+                }
             }
 
             UpdateComboBoxWyporzyczenia();
@@ -422,7 +488,10 @@ namespace Biblioteka2022
                 label_wyporzyczenia.Content = "Data zwrotu nie może być przed datą wyporzyczenia!";
             }
 
-            label_wyporzyczenia.Content = DataDiffrence.ToString();
+
+
+
+            //label_wyporzyczenia.Content = DataDiffrence.ToString();
         }
     }
 }
