@@ -1,6 +1,7 @@
 using System;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -255,6 +256,30 @@ namespace Biblioteka2022
             
         }
 
+        private void button_ksiazki_dodaj_Click(object sender, RoutedEventArgs e)
+        {
+            label_ksiazki.Content = "";
 
+            string autor = input_ksiazki_autor.Text;
+            string tytul = input_ksiazki_tytul.Text;
+            string opis = input_ksiazki_opis.Text;
+            string wydanie = input_ksiazki_wydanie.Text;
+
+            if(!Regex.IsMatch(wydanie, @"^[0-9]+$"))
+            {
+                label_ksiazki.Content = "Rok wydania może zawierać jedynie liczby!";
+            }
+
+            if ((wydanie.Length>4) == true)
+            {
+                label_ksiazki.Content = "Zadługi rok wydania!";
+            }
+
+            if ( autor.Equals(" ")|| autor.Equals("")|| tytul.Equals(" ") || tytul.Equals("") || opis.Equals(" ") || opis.Equals("") || wydanie.Equals(" ") || wydanie.Equals(""))
+            {
+                label_ksiazki.Content = "Należy Wypełnić wszystkie pola!";
+            }
+            
+        }
     }
 }
