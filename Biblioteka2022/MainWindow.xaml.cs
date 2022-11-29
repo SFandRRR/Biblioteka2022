@@ -374,8 +374,8 @@ namespace Biblioteka2022
             int klient = -1;
             int ksiazka = -1;
 
-            string DataWyporzyczenia = input_klient_pesel.Text;
-            string DataZwrotu = input_klient_telefon.Text;
+            string DataWyporzyczenia = "";
+            string DataZwrotu = "";
 
             try
             {
@@ -397,10 +397,32 @@ namespace Biblioteka2022
                     label_wyporzyczenia.Content = "Należy wybrać książke!";
                 }
             } catch { Trace.WriteLine("ComboBoxItem Null"); }
-            
 
+            if (input_wyporzyczenia_datawyporzyczenia.ToString() != "")
+            {
+                DataWyporzyczenia = input_wyporzyczenia_datawyporzyczenia.ToString();
+            }
+            else
+            {
+                label_wyporzyczenia.Content = "Należy wybrać datę wyporzyczenia!";
+            }
 
-            label_wyporzyczenia.Content = klient.ToString() + " " + ksiazka.ToString();
+            if (input_wyporzyczenia_datazwrot.ToString() != "")
+            {
+                DataZwrotu = input_wyporzyczenia_datazwrot.ToString();
+            }
+            else
+            {
+                label_wyporzyczenia.Content = "Należy wybrać datę zwrotu!";
+            }
+
+            TimeSpan? DataDiffrence = (input_wyporzyczenia_datazwrot.SelectedDate - input_wyporzyczenia_datawyporzyczenia.SelectedDate);
+            if (DataDiffrence.ToString()[0] == '-')
+            {
+                label_wyporzyczenia.Content = "Data zwrotu nie może być przed datą wyporzyczenia!";
+            }
+
+            label_wyporzyczenia.Content = DataDiffrence.ToString();
         }
     }
 }
