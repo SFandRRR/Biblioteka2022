@@ -55,30 +55,34 @@
                                 <DatePicker x:Name="input_wyporzyczenia_datawyporzyczenia" Width="250" Height="30" Margin="200,90,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                                 <Label FontSize="18" Margin="10,140,10,10" HorizontalAlignment="Left" VerticalAlignment="Top">Data zwrotu</Label>
                                 <DatePicker x:Name="input_wyporzyczenia_datazwrot" Width="250" Height="30" Margin="200,140,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                                
+
                                 <Label x:Name="label_wyporzyczenia" Content="." VerticalAlignment="Top" Height="30" Margin="0,240,0,0" Width="500" HorizontalAlignment="Left" />
-                                <Button x:Name="button_wyporzyczenia_dodaj" Width="250" Height="30" Margin="10,200,10,10" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14">Dodaj</Button>
+                                <Button x:Name="button_wyporzyczenia_dodaj" Width="250" Height="30" Margin="10,200,10,10" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Click="button_wyporzyczenia_dodaj_Click">Dodaj</Button>
                             </Grid>
-                           
+
                         </TabItem>
                         <TabItem Header="Klienci">
                             <Grid Background="#FFE5E5E5">
-                                <Label FontSize="18" Margin="10,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top">Imie</Label>
-                                <TextBox x:Name="input_klient_imie" Width="250" Height="30" Margin="200,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                                
-                                <Label FontSize="18" Margin="10,50,10,10" HorizontalAlignment="Left" VerticalAlignment="Top">Nazwisko</Label>
-                                <TextBox x:Name="input_klient_nazwisko" Width="250" Height="30" Margin="200,50,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                                
-                                <Label FontSize="18" Margin="10,90,10,10" HorizontalAlignment="Left" VerticalAlignment="Top">Pesel</Label>
-                                <TextBox x:Name="input_klient_pesel" Width="250" Height="30" Margin="200,90,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                                
-                                <Label FontSize="18" Margin="10,130,10,10" HorizontalAlignment="Left" VerticalAlignment="Top">Telefon</Label>
-                                <TextBox x:Name="input_klient_telefon" Width="250" Height="30" Margin="200,130,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="57*"/>
+                                    <ColumnDefinition Width="731*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label FontSize="18" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">Imie</Label>
+                                <TextBox x:Name="input_klient_imie" Width="250" Height="30" Margin="143,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1"/>
 
-                                <Label x:Name="label_klient" Content="." VerticalAlignment="Top" Height="30" Margin="0,240,0,0" Width="500" HorizontalAlignment="Left" />
-                                <Button x:Name="button_klient_dodaj" Width="250" Height="30" Margin="10,200,10,10" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Click="button_klient_dodaj_Click">Dodaj</Button>
+                                <Label FontSize="18" Margin="10,50,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2">Nazwisko</Label>
+                                <TextBox x:Name="input_klient_nazwisko" Width="250" Height="30" Margin="143,50,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1"/>
+
+                                <Label FontSize="18" Margin="10,90,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2">Pesel</Label>
+                                <TextBox x:Name="input_klient_pesel" Width="250" Height="30" Margin="143,90,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1"/>
+
+                                <Label FontSize="18" Margin="10,130,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2">Telefon</Label>
+                                <TextBox x:Name="input_klient_telefon" Width="250" Height="30" Margin="143,130,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1"/>
+
+                                <Label x:Name="label_klient" Content="." VerticalAlignment="Top" Height="30" Margin="0,240,0,0" Width="500" HorizontalAlignment="Left" Grid.ColumnSpan="2" />
+                                <Button x:Name="button_klient_dodaj" Width="250" Height="30" Margin="10,200,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Click="button_klient_dodaj_Click" Grid.ColumnSpan="2">Dodaj</Button>
                             </Grid>
-                            
+
                         </TabItem>
                         <TabItem Header="Ksiązki">
 
@@ -98,7 +102,7 @@
                                 <Label x:Name="label_ksiazki" Content="." VerticalAlignment="Top" Height="30" Margin="0,240,0,0" Width="500" HorizontalAlignment="Left" />
                                 <Button x:Name="button_ksiazki_dodaj" Width="250" Height="30" Margin="10,200,10,10" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Click="button_ksiazki_dodaj_Click">Dodaj</Button>
                             </Grid>
-                            
+
                         </TabItem>
                     </TabControl>
                 </Grid>

@@ -16,6 +16,7 @@ namespace Biblioteka2022
         public MainWindow()
         {
             InitializeComponent();
+            UpdateComboBoxWyporzyczenia();
         }
 
         private void input_wyswietl_tabela_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -279,7 +280,9 @@ namespace Biblioteka2022
             {
                 label_ksiazki.Content = "Należy Wypełnić wszystkie pola!";
             }
-            
+
+            UpdateComboBoxWyporzyczenia();
+
         }
 
         private void button_klient_dodaj_Click(object sender, RoutedEventArgs e)
@@ -315,6 +318,89 @@ namespace Biblioteka2022
             {
                 label_klient.Content = "Należy Wypełnić wszystkie pola!";
             }
+
+            UpdateComboBoxWyporzyczenia();
+        }
+
+
+        void UpdateComboBoxWyporzyczenia()
+        {
+            string Query1 = "SELECT * FROM Klienci;";
+            string Query2 = "SELECT * FROM Ksiazki;";
+            try
+            {
+                input_wyporzyczenia_klient.Items.Clear();
+                input_wyporzyczenia_ksiazka.Items.Clear();
+
+                //input_wyswietl_pole.Items.Add("[Brak]");
+            
+                string SQLServer = "server=s217-pc12\\SQLEXPRESS2019;database=Biblioteka2022;Integrated Security=True";
+                //s217-pc12\SQLEXPRESS2019
+                //DESKTOP-8JDEIA5
+                SqlConnection sql = new SqlConnection(SQLServer);
+                sql.Open();
+
+                SqlCommand command1 = new SqlCommand(Query1, sql);
+                using (SqlDataReader reader = command1.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        input_wyporzyczenia_klient.Items.Add(reader[0] + " " + reader[1] + " " + reader[2] + " " + reader[3] );
+                    }
+                }
+
+                SqlCommand command2 = new SqlCommand(Query2, sql);
+                using (SqlDataReader reader = command2.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        input_wyporzyczenia_ksiazka.Items.Add(reader[0] + " " + reader[2] + " - " + reader[1] + " (" + reader[4]+")");
+                    }
+                }
+
+                sql.Close();
+            }
+            catch
+            {
+                Trace.WriteLine("> Error with fetching SQL Query in tabitemfocus");
+            }
+
+        }
+
+        private void button_wyporzyczenia_dodaj_Click(object sender, RoutedEventArgs e)
+        {
+            label_wyporzyczenia.Content = "";
+
+            int klient = -1;
+            int ksiazka = -1;
+
+            string DataWyporzyczenia = input_klient_pesel.Text;
+            string DataZwrotu = input_klient_telefon.Text;
+
+            try
+            {
+                if (input_wyporzyczenia_klient.SelectedItem != null)
+                {
+                    klient = input_wyporzyczenia_klient.SelectedIndex+1;
+                }
+                else
+                {
+                    label_wyporzyczenia.Content = "Należy wybrać klienta!";
+                }
+
+                if (input_wyporzyczenia_ksiazka.SelectedItem != null)
+                {
+                    ksiazka = input_wyporzyczenia_ksiazka.SelectedIndex+1;
+                }
+                else
+                {
+                    label_wyporzyczenia.Content = "Należy wybrać książke!";
+                }
+            } catch { Trace.WriteLine("ComboBoxItem Null"); }
+            
+
+
+            label_wyporzyczenia.Content = klient.ToString() + " " + ksiazka.ToString();
         }
     }
 }
