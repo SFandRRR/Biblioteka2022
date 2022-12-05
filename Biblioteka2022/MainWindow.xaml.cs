@@ -21,6 +21,10 @@ namespace Biblioteka2022
             UpdateComboBoxWyporzyczenia();
         }
 
+        string SQLServer = "server=DESKTOP-8JDEIA5;database=Biblioteka2022;Integrated Security=True";
+        //s217-pc12\SQLEXPRESS2019
+        //DESKTOP-8JDEIA5
+
         private void input_wyswietl_tabela_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBoxItem typeItem = (ComboBoxItem)input_wyswietl_tabela.SelectedItem;
@@ -178,9 +182,6 @@ namespace Biblioteka2022
                 //return Query;
                 try
                 {
-                    string SQLServer = "server=s217-pc12\\SQLEXPRESS2019;database=Biblioteka2022;Integrated Security=True";
-                    //s217-pc12\SQLEXPRESS2019
-                    //DESKTOP-8JDEIA5
                     SqlConnection sql = new SqlConnection(SQLServer);
                    sql.Open();
                     SqlCommand command = new SqlCommand(Query, sql);
@@ -294,9 +295,6 @@ namespace Biblioteka2022
                 {
                     string Query = "INSERT INTO Ksiazki(Tytul, Autor, Opis, RokWydania) VALUES('"+tytul+"', '"+autor+"', '"+opis+"', '"+wydanie+"');";
 
-                    string SQLServer = "server=s217-pc12\\SQLEXPRESS2019;database=Biblioteka2022;Integrated Security=True";
-                    //s217-pc12\SQLEXPRESS2019
-                    //DESKTOP-8JDEIA5
                     SqlConnection sql = new SqlConnection(SQLServer);
                     sql.Open();
                     SqlCommand command = new SqlCommand(Query, sql);
@@ -365,9 +363,6 @@ namespace Biblioteka2022
                 {
                     string Query = "INSERT INTO Klienci(Imie, Nazwisko, Pesel, Telefon) VALUES('" + imie + "', '" + nazwisko + "', '" + pesel + "', '" + telefon + "');";
 
-                    string SQLServer = "server=s217-pc12\\SQLEXPRESS2019;database=Biblioteka2022;Integrated Security=True";
-                    //s217-pc12\SQLEXPRESS2019
-                    //DESKTOP-8JDEIA5
                     SqlConnection sql = new SqlConnection(SQLServer);
                     sql.Open();
                     SqlCommand command = new SqlCommand(Query, sql);
@@ -400,9 +395,6 @@ namespace Biblioteka2022
 
                 //input_wyswietl_pole.Items.Add("[Brak]");
             
-                string SQLServer = "server=s217-pc12\\SQLEXPRESS2019;database=Biblioteka2022;Integrated Security=True";
-                //s217-pc12\SQLEXPRESS2019
-                //DESKTOP-8JDEIA5
                 SqlConnection sql = new SqlConnection(SQLServer);
                 sql.Open();
 
@@ -504,9 +496,6 @@ namespace Biblioteka2022
                 {
                     string Query = "INSERT INTO Wyporzyczenia(Id_Klient, Id_Ksiazka, DataWyporzyczenia, DataZwrotu) VALUES(" + klient + ", " + ksiazka+ ", '" +DataWyporzyczenia+ "', '" + DataZwrotu + "');";
 
-                    string SQLServer = "server=s217-pc12\\SQLEXPRESS2019;database=Biblioteka2022;Integrated Security=True";
-                    //s217-pc12\SQLEXPRESS2019
-                    //DESKTOP-8JDEIA5
                     SqlConnection sql = new SqlConnection(SQLServer);
                     sql.Open();
                     SqlCommand command = new SqlCommand(Query, sql);
