@@ -15,16 +15,24 @@ namespace Biblioteka2022
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
             UpdateComboBoxWyporzyczenia();
+
         }
-
+        /// <summary>
+        /// Adres serwera SQL na którym zlokalizowana jest baza biblioteki
+        /// </summary>
         string SQLServer = "server=s217-pc12\\SQLEXPRESS2019;database=Biblioteka2022;Integrated Security=True";
-        //s217-pc12\SQLEXPRESS2019
-        //DESKTOP-8JDEIA5
 
+
+        /// <summary>
+        /// Aktualizuje wyświetlaną tabele za każdą zmianą wyboru combobox'a
+        /// </summary>
+        /// <param name="sender">Wygenerowane automatycznie</param>
+        /// <param name="e">Wygenerowane automatycznie</param>
         private void input_wyswietl_tabela_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBoxItem typeItem = (ComboBoxItem)input_wyswietl_tabela.SelectedItem;
@@ -34,10 +42,15 @@ namespace Biblioteka2022
 
             string value = wyswietl_rekordy(tabela, "", "", "");
             textbox_wyswietl.Document.Blocks.Clear();
-            textbox_wyswietl.Document.Blocks.Add(new Paragraph(new Run(value.ToString())));
-
+            textbox_wyswietl.Document.Blocks.Add(new Paragraph(new Run(value.ToString())));    
         }
 
+
+        /// <summary>
+        /// Po wciśnięciu wszyukiwana wysyła odpowiednie zapytanie do bazy danych, i wyświetla rezultat
+        /// </summary>
+        /// <param name="sender">Wygenerowane automatycznie</param>
+        /// <param name="e">Wygenerowane automatycznie</param>
         private void button_wyswietl_szukaj_Click(object sender, RoutedEventArgs e)
         {
             string tabela = "";
@@ -72,11 +85,21 @@ namespace Biblioteka2022
 
         }
 
+        
+        /// <summary>
+        /// Główna funkcja odpowiedzialna za wyświetlanie rekordów z bazy danych
+        /// </summary>
+        /// <param name="tabela">parametr z której tabeli wyświetlać</param>
+        /// <param name="pole">parametr według którego pola wyszukiwać</param>
+        /// <param name="sposob">parametr wskazujący którego warunku szukającego użyć</param>
+        /// <param name="filtr">parametr którego teksu szukać w danym polu</param>
+        /// <returns>Zwraca rezultat z bazy danych w postaci tekstu</returns>
         string wyswietl_rekordy(
            string tabela = "",
            string pole = "",
            string sposob = "",
            string filtr = ""
+
            )
         {
             string Query = "SELECT * ";
@@ -174,13 +197,11 @@ namespace Biblioteka2022
                             break;
 
                         default:
-                            Query += "";
-                            Trace.WriteLine("> This code should not be reachable switch(sposob)");
+                            Query += "";                           
                             break;
                     }
                 }
                 Query += ";";
-                //return Query;
                 try
                 {
                     SqlConnection sql = new SqlConnection(SQLServer);
@@ -196,7 +217,6 @@ namespace Biblioteka2022
                     }
 
                     sql.Close();
-                    //return Query;
                     return TheInformation;
                 }
                 catch
@@ -208,6 +228,10 @@ namespace Biblioteka2022
             return "";
         }
 
+        /// <summary>
+        /// Funkcja aktualizująca dostępne pola w ComboBox'ie wyboru pól, na podstawie wybranej tabeli
+        /// </summary>
+        /// <param name="tabela"> parametr na podstawie którego zmieniane są pola combobox'a </param>
         void pola_tabeli(string tabela)
         {
             
@@ -259,7 +283,11 @@ namespace Biblioteka2022
             }
             
         }
-
+        /// <summary>
+        /// Po wciśnięciu przycisku sprawdzane są pola i wysyłane jest polecenie do bazy danych dodające rekord, zawierający informacje o książce
+        /// </summary>
+        /// <param name="sender">Wygenerowane automatycznie</param>
+        /// <param name="e">Wygenerowane automatycznie</param>
         private void button_ksiazki_dodaj_Click(object sender, RoutedEventArgs e)
         {
             label_ksiazki.Content = "";
@@ -315,7 +343,11 @@ namespace Biblioteka2022
             UpdateComboBoxWyporzyczenia();
 
         }
-
+        /// <summary>
+        /// Po wciśnięciu przycisku sprawdzane są pola i wysyłane jest polecenie do bazy danych dodające rekord, zawierający informacje o kliencie
+        /// </summary>
+        /// <param name="sender">Wygenerowane automatycznie</param>
+        /// <param name="e">Wygenerowane automatycznie</param>
         private void button_klient_dodaj_Click(object sender, RoutedEventArgs e)
         {
             label_klient.Content = "";
@@ -383,7 +415,9 @@ namespace Biblioteka2022
             UpdateComboBoxWyporzyczenia();
         }
 
-
+        /// <summary>
+        /// Funkcja aktualizująca ComboBox'y wyboru klienta i ksiązki w oknie dodawania wyporzyczenia
+        /// </summary>
         void UpdateComboBoxWyporzyczenia()
         {
             string Query1 = "SELECT * FROM Klienci;";
@@ -392,8 +426,6 @@ namespace Biblioteka2022
             {
                 input_wyporzyczenia_klient.Items.Clear();
                 input_wyporzyczenia_ksiazka.Items.Clear();
-
-                //input_wyswietl_pole.Items.Add("[Brak]");
             
                 SqlConnection sql = new SqlConnection(SQLServer);
                 sql.Open();
@@ -424,7 +456,11 @@ namespace Biblioteka2022
             }
 
         }
-
+        /// <summary>
+        /// Po wciśnięciu przycisku sprawdzane są pola i wysyłane jest polecenie do bazy danych dodające rekord, zawierający informacje o wyporzyczeniu
+        /// </summary>
+        /// <param name="sender">Wygenerowane automatycznie</param>
+        /// <param name="e">Wygenerowane automatycznie</param>
         private void button_wyporzyczenia_dodaj_Click(object sender, RoutedEventArgs e)
         {
             label_wyporzyczenia.Content = "";
@@ -513,8 +549,6 @@ namespace Biblioteka2022
                 }
             }
 
-
-            //label_wyporzyczenia.Content = DataDiffrence.ToString();
         }
     }
 }
