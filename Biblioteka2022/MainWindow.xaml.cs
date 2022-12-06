@@ -21,7 +21,7 @@ namespace Biblioteka2022
             UpdateComboBoxWyporzyczenia();
         }
 
-        string SQLServer = "server=DESKTOP-8JDEIA5;database=Biblioteka2022;Integrated Security=True";
+        string SQLServer = "server=s217-pc12\\SQLEXPRESS2019;database=Biblioteka2022;Integrated Security=True";
         //s217-pc12\SQLEXPRESS2019
         //DESKTOP-8JDEIA5
 
@@ -32,8 +32,9 @@ namespace Biblioteka2022
 
             pola_tabeli(tabela); 
 
-            string z = wyswietl_rekordy(tabela, "", "", "");
-            Trace.WriteLine(z + "bbbbb");
+            string value = wyswietl_rekordy(tabela, "", "", "");
+            textbox_wyswietl.Document.Blocks.Clear();
+            textbox_wyswietl.Document.Blocks.Add(new Paragraph(new Run(value.ToString())));
 
         }
 
@@ -173,7 +174,7 @@ namespace Biblioteka2022
                             break;
 
                         default:
-                            Query += " = 0 ";
+                            Query += "";
                             Trace.WriteLine("> This code should not be reachable switch(sposob)");
                             break;
                     }
@@ -195,13 +196,12 @@ namespace Biblioteka2022
                     }
 
                     sql.Close();
-
                     //return Query;
                     return TheInformation;
                 }
                 catch
                 {
-                    Trace.WriteLine("> Error with fetching SQL Query");
+                    Trace.WriteLine("> Error with fetching SQL Query in display "+Query);
                 }
 
             }
